@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Honorer ses parents — L'amour commence à la maison</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red-deep:    #5c1a1a;
+      --red-mid:     #8b3a3a;
+      --red-soft:    #c97c5d;
+      --gold:        #d4a84b;
+      --gold-light:  #f0d090;
+      --gold-pale:   #fdf3dc;
+      --cream:       #faf6ef;
+      --ink:         #2c1a0e;
+      --blush:       #e8c5b0;
+      --warm-gray:   #8a7060;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(92, 26, 26, 0.93);
+      backdrop-filter: blur(10px);
+      padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-light);
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+    }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a {
+      color: var(--gold-pale);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      transition: color .25s;
+    }
+    nav ul a:hover { color: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--red-deep) 0%, #7a2e2e 50%, var(--red-mid) 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 100px 40px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.07;
+      background: var(--gold-light);
+    }
+    .hero::before {
+      width: 600px; height: 600px;
+      top: -200px; right: -150px;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .hero::after {
+      width: 400px; height: 400px;
+      bottom: -100px; left: -80px;
+      animation: drift 9s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes drift {
+      from { transform: translateY(0) scale(1); }
+      to   { transform: translateY(30px) scale(1.08); }
+    }
+
+    .hero-pattern {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(212,168,75,0.03) 0px, rgba(212,168,75,0.03) 1px,
+        transparent 1px, transparent 20px
+      );
+    }
+
+    .hero-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      animation: bounce 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(212,168,75,0.5));
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .hero h1 span { color: var(--gold-light); }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--gold-pale);
+      max-width: 560px;
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--red-deep);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 20px rgba(212,168,75,.4);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(212,168,75,.6);
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: var(--gold); font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+    }
+    .scroll-hint .arrow {
+      width: 18px; height: 18px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: scrollBounce 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%,100% { opacity: 1; transform: rotate(45deg) translateY(0); }
+      50%      { opacity: .4; transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ── SECTION HEADERS ── */
+    section { padding: 90px 40px; }
+
+    .section-label {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--warm-gray);
+      line-height: 1.9;
+      max-width: 580px;
+    }
+
+    /* ── WAYS ── */
+    .ways {
+      background: var(--red-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    .ways::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0d090' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .ways .section-title  { color: var(--gold-pale); }
+    .ways .section-label  { color: var(--gold-light); }
+    .ways .section-subtitle { color: var(--gold-light); opacity: .8; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .card {
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+    .card-icon { font-size: 2.8rem; margin-bottom: 16px; display: block; }
+    .card-dot  { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+    .card-type {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      display: flex; align-items: center;
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .card p  { font-size: .88rem; line-height: 1.75; opacity: .9; }
+    .card ul { font-size: .85rem; line-height: 1.9; padding-left: 16px; opacity: .9; }
+
+    .card-red    { background: #3d0f0f; color: #f5cec0; }
+    .card-red .card-dot { background: #e07060; }
+    .card-gold   { background: #3d2e00; color: #f5e8b0; }
+    .card-gold .card-dot { background: var(--gold); }
+    .card-teal   { background: #0e2e30; color: #b8e0e4; }
+    .card-teal .card-dot { background: #5fc8d0; }
+    .card-purple { background: #251530; color: #d8c0f0; }
+    .card-purple .card-dot { background: #a070d8; }
+    .card-green  { background: #0e2a1a; color: #b0e8c8; }
+    .card-green .card-dot { background: #50c88a; }
+
+    /* ── TIPS ── */
+    .tips { background: var(--cream); }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 52px;
+    }
+    .tip-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      border-left: 4px solid var(--gold);
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .tip-item:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      transform: translateY(-4px);
+    }
+    .tip-num {
+      min-width: 48px; height: 48px;
+      background: var(--gold-pale);
+      color: var(--red-mid);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+    .tip-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+    .tip-text p  { font-size: .88rem; color: var(--warm-gray); line-height: 1.7; }
+
+    /* ── STATS ── */
+    .stats {
+      background: linear-gradient(135deg, var(--red-mid) 0%, #5c2020 100%);
+      text-align: center;
+    }
+    .stats .section-title { color: #fff; }
+    .stats .section-label { color: var(--gold-light); }
+    .stats-row {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 48px;
+      margin-top: 56px;
+    }
+    .stat-box { color: #fff; }
+    .stat-box .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-box .unit { font-size: 1.2rem; font-weight: 500; color: var(--gold-light); }
+    .stat-box .desc { font-size: .9rem; color: var(--gold-pale); margin-top: 8px; max-width: 160px; line-height: 1.7; }
+
+    /* ── PITFALLS ── */
+    .pitfalls { background: #fdf5ee; }
+    .pitfalls-list {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .pitfall-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 22px;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .pitfall-row:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      transform: translateY(-3px);
+    }
+    .pitfall-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .pitfall-row p { font-size: .9rem; color: #6a5048; line-height: 1.65; }
+    .pitfall-row p strong { color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--red-deep);
+      color: var(--gold-light);
+      text-align: center;
+      padding: 48px 40px;
+    }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+    footer p { font-size: .85rem; color: var(--gold); opacity: .75; line-height: 1.9; }
+    footer .footer-links { display: flex; justify-content: center; gap: 32px; margin: 20px 0; }
+    footer .footer-links a { color: var(--gold-light); text-decoration: none; font-size: .85rem; transition: color .2s; }
+    footer .footer-links a:hover { color: #fff; }
+
+    /* ── FADE-IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      section { padding: 70px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">🏮 Cœur de Famille</div>
+  <ul>
+    <li><a href="#ways">Façons d'aimer</a></li>
+    <li><a href="#tips">Conseils pratiques</a></li>
+    <li><a href="#stats">Chiffres clés</a></li>
+    <li><a href="#pitfalls">Erreurs à éviter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-icon">🏮</div>
+  <h1>Honorer ses parents,<br/><span>l'amour commence ici</span></h1>
+  <p>Nos parents nous ont offert la vie et leur amour inconditionnel. Les honorer est la plus belle façon de leur rendre ce qu'ils nous ont donné — un geste à la fois, un jour à la fois.</p>
+  <a href="#ways" class="btn-primary">Découvrir comment agir</a>
+  <div class="scroll-hint"><span>Défiler</span><div class="arrow"></div></div>
+</section>
+
+<!-- WAYS -->
+<section class="ways" id="ways">
+  <div class="section-label">Guide pratique</div>
+  <h2 class="section-title">Cinq façons d'honorer ses parents</h2>
+  <p class="section-subtitle">L'amour filial ne se mesure pas aux grands gestes, mais aux attentions du quotidien. Chaque façon d'agir est un langage de l'amour — choisissez celle qui vous ressemble.</p>
+
+  <div class="cards-grid">
+    <div class="card card-red fade-in">
+      <span class="card-icon">📞</span>
+      <div class="card-type"><span class="card-dot"></span>Présence quotidienne</div>
+      <h3>Être là, vraiment</h3>
+      <p>Le temps est le cadeau le plus précieux. Quelles que soient vos obligations, réservez du temps pour être présent auprès d'eux.</p>
+      <ul style="margin-top:12px">
+        <li>Appeler ou faire des visios régulières</li>
+        <li>Rentrer pour les fêtes et anniversaires</li>
+        <li>Partager des repas ensemble</li>
+        <li>Raconter sa vie, ses joies et ses peines</li>
+      </ul>
+    </div>
+
+    <div class="card card-gold fade-in">
+      <span class="card-icon">🏥</span>
+      <div class="card-type"><span class="card-dot"></span>Santé & bien-être</div>
+      <h3>Veiller sur leur santé</h3>
+      <p>En vieillissant, la santé devient leur bien le plus précieux. Y prêter attention est un acte d'amour profond.</p>
+      <ul style="margin-top:12px">
+        <li>Les accompagner aux bilans médicaux</li>
+        <li>Veiller à la prise des médicaments</li>
+        <li>S'assurer d'une alimentation équilibrée</li>
+        <li>Être présent en cas de maladie</li>
+      </ul>
+    </div>
+
+    <div class="card card-teal fade-in">
+      <span class="card-icon">💬</span>
+      <div class="card-type"><span class="card-dot"></span>Soutien émotionnel</div>
+      <h3>Écouter & dialoguer</h3>
+      <p>Nos parents ont une vie intérieure riche. Les écouter avec patience et respect est la forme la plus sincère de considération.</p>
+      <ul style="margin-top:12px">
+        <li>Écouter sans interrompre</li>
+        <li>Respecter leurs opinions</li>
+        <li>Partager leurs inquiétudes</li>
+        <li>Éviter les conflits, privilégier la paix</li>
+      </ul>
+    </div>
+
+    <div class="card card-purple fade-in">
+      <span class="card-icon">📱</span>
+      <div class="card-type"><span class="card-dot"></span>Aide numérique</div>
+      <h3>Les aider à l'ère digitale</h3>
+      <p>Aider ses parents à naviguer dans le monde numérique, c'est leur ouvrir une fenêtre sur le monde et réduire leur isolement.</p>
+      <ul style="margin-top:12px">
+        <li>Apprendre à utiliser le smartphone</li>
+        <li>Maîtriser les appels vidéo</li>
+        <li>Découvrir les achats en ligne</li>
+        <li>Les protéger des arnaques numériques</li>
+      </ul>
+    </div>
+
+    <div class="card card-green fade-in">
+      <span class="card-icon">🎁</span>
+      <div class="card-type"><span class="card-dot"></span>Soutien matériel</div>
+      <h3>Subvenir à leurs besoins</h3>
+      <p>Dans la mesure du possible, améliorer leur confort matériel est aussi une belle expression de l'amour filial.</p>
+      <ul style="margin-top:12px">
+        <li>Contribuer aux dépenses du foyer</li>
+        <li>Améliorer leur cadre de vie</li>
+        <li>Offrir des cadeaux sincères</li>
+        <li>Réaliser leurs petits rêves</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips" id="tips">
+  <div class="section-label">Conseils pratiques</div>
+  <h2 class="section-title">Mettre l'amour en action</h2>
+  <p class="section-subtitle">Honorer ses parents s'apprend et se cultive. Voici des conseils concrets pour transformer vos bonnes intentions en gestes quotidiens.</p>
+
+  <div class="tips-grid">
+    <div class="tip-item fade-in">
+      <div class="tip-num">1</div>
+      <div class="tip-text">
+        <h4>Instaurer un « jour famille »</h4>
+        <p>Fixez un moment régulier — hebdomadaire ou mensuel — dédié à vos parents. Un repas, une promenade, un film : la régularité crée l'attachement.</p>
+      </div>
+    </div>
+    <div class="tip-item fade-in">
+      <div class="tip-num">2</div>
+      <div class="tip-text">
+        <h4>S'intéresser à leur jeunesse</h4>
+        <p>Posez-leur des questions sur leur passé, leurs passions d'antan, leur époque. Entrer dans leur monde est le chemin le plus court vers leur cœur.</p>
+      </div>
+    </div>
+    <div class="tip-item fade-in">
+      <div class="tip-num">3</div>
+      <div class="tip-text">
+        <h4>Capturer leur histoire</h4>
+        <p>Enregistrez leurs récits, leurs souvenirs, leur sagesse — en texte ou en vidéo. C'est le patrimoine le plus précieux que vous léguerez à votre famille.</p>
+      </div>
+    </div>
+    <div class="tip-item fade-in">
+      <div class="tip-num">4</div>
+      <div class="tip-text">
+        <h4>Gérer ses émotions avec patience</h4>
+        <p>En cas de désaccord, prenez du recul avant de répondre. Une parole blessante laisse une trace bien plus longue qu'un moment de calme.</p>
+      </div>
+    </div>
+    <div class="tip-item fade-in">
+      <div class="tip-num">5</div>
+      <div class="tip-text">
+        <h4>Encourager leur vie sociale</h4>
+        <p>Aidez-les à maintenir des liens sociaux : clubs, ateliers, associations. Une vie sociale active est essentielle à leur équilibre mental.</p>
+      </div>
+    </div>
+    <div class="tip-item fade-in">
+      <div class="tip-num">6</div>
+      <div class="tip-text">
+        <h4>Montrer l'exemple</h4>
+        <p>La façon dont vous traitez vos parents est celle dont vos enfants vous traiteront demain. L'amour filial se transmet par l'exemple.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="section-label">Des chiffres qui touchent au cœur</div>
+  <h2 class="section-title">Le temps ne s'arrête pas — agissons maintenant</h2>
+
+  <div class="stats-row">
+    <div class="stat-box fade-in">
+      <div class="num">24<span class="unit"> ans</span></div>
+      <div class="desc">le temps moyen qu'il nous reste à passer avec nos parents après nos 18 ans</div>
+    </div>
+    <div class="stat-box fade-in">
+      <div class="num">29<span class="unit">%</span></div>
+      <div class="desc">des personnes âgées souffrent de solitude sévère en France</div>
+    </div>
+    <div class="stat-box fade-in">
+      <div class="num">1<span class="unit"> sur 3</span></div>
+      <div class="desc">personnes âgées déclare que les visites de leurs enfants lui manquent le plus</div>
+    </div>
+    <div class="stat-box fade-in">
+      <div class="num">15<span class="unit"> min</span></div>
+      <div class="desc">d'appel par jour suffisent à réduire significativement la solitude des parents</div>
+    </div>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section class="pitfalls" id="pitfalls">
+  <div class="section-label">Erreurs à éviter</div>
+  <h2 class="section-title">Les pièges qui blessent sans qu'on le sache</h2>
+  <p class="section-subtitle">Beaucoup pensent bien faire, mais certains comportements, même bien intentionnés, peuvent blesser. Reconnaître ces erreurs, c'est déjà progresser.</p>
+
+  <div class="pitfalls-list">
+    <div class="pitfall-row fade-in">
+      <div class="pitfall-icon">💸</div>
+      <p><strong>Remplacer la présence par l'argent :</strong> offrir de l'argent sans jamais venir les voir. Ce dont ils ont besoin, c'est de vous — pas de votre portefeuille.</p>
+    </div>
+    <div class="pitfall-row fade-in">
+      <div class="pitfall-icon">📱</div>
+      <p><strong>Être sur son téléphone lors des visites :</strong> être physiquement là mais mentalement absent blesse plus que l'absence elle-même.</p>
+    </div>
+    <div class="pitfall-row fade-in">
+      <div class="pitfall-icon">🩺</div>
+      <p><strong>Négliger leur santé mentale :</strong> se concentrer sur le corps et oublier l'âme. La dépression et l'anxiété touchent aussi les personnes âgées.</p>
+    </div>
+    <div class="pitfall-row fade-in">
+      <div class="pitfall-icon">🗣️</div>
+      <p><strong>Décider à leur place :</strong> vouloir tout gérer à leur place leur retire leur autonomie et leur dignité. Leur donner le choix, c'est les respecter.</p>
+    </div>
+    <div class="pitfall-row fade-in">
+      <div class="pitfall-icon">⏳</div>
+      <p><strong>Toujours remettre à plus tard :</strong> « j'irai quand j'aurai du temps » est la phrase qui engendre le plus de regrets. Il n'y a pas de meilleur moment qu'aujourd'hui.</p>
+    </div>
+    <div class="pitfall-row fade-in">
+      <div class="pitfall-icon">😤</div>
+      <p><strong>Perdre patience avec eux :</strong> ils deviennent parfois comme des enfants — et ont besoin de la même douceur qu'ils vous ont accordée autrefois.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🏮 Cœur de Famille</div>
+  <div class="footer-links">
+    <a href="#ways">Façons d'aimer</a>
+    <a href="#tips">Conseils pratiques</a>
+    <a href="#stats">Chiffres clés</a>
+    <a href="#pitfalls">Erreurs à éviter</a>
+  </div>
+  <p>Le temps passe vite, et l'amour se dit dans les gestes.<br/>Dites-leur que vous les aimez — aujourd'hui, pas demain.</p>
+  <p style="margin-top:24px; font-size:.75rem; opacity:.4;">© 2026 Cœur de Famille — Parce que l'amour commence à la maison</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
